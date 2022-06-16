@@ -11,7 +11,7 @@ let gpIssueListAssign = (await $`gh issue list -a "@me" -R ${url}`)
 let idOfLastIssueAssigned = gpIssueListAssign[0][0];
 
 await $`git push -u origin HEAD` // to not require interective on gh pr create 
-let prBody = `"${tag}: ${url}/issues/${idOfLastIssueAssigned}"`;
+let prBody = `${tag}: ${url}/issues/${idOfLastIssueAssigned}`;
 
 let prLink = (await $`gh pr create --fill --body ${prBody}`).toString();
-await $`xdg-open "${prLink}"`; // open in browser to review
+await $`xdg-open ${prLink}`; // open in browser to review

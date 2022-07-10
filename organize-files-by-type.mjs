@@ -12,8 +12,6 @@ let extensions = files.map((file) => file.split(".")[1])
     return acc;
   },[]);
 
-extensions.push('webstorm');
-
 // linux terminal get folders name with ls
 let folders = (await $`cd ${targetFolder} && ls -d  */`).toString().split("\n");
 

@@ -13,8 +13,7 @@ let extensions = files.map((file) => file.split(".")[1])
   },[]);
 
 // linux terminal get folders name with ls
-let folders = (await $`cd ${targetFolder} && ls -d  */`).toString().split("\n");
-
+let folders = (await $`cd ${targetFolder} && ls -d  */`)?.toString()?.split("\n")
 let extensionsWithFolders = folders.map((folder) => folder.split("/")[0])
   .filter(foldersName => extensions.indexOf(foldersName) != -1)
 
@@ -26,7 +25,7 @@ if(extensionsWithFolders.length > 0) {
         console.log(`mv ${targetFolder}/${file} ${targetFolder}/${extension}`);
         $`mv ${targetFolder}/${file} ${targetFolder}/${extension}`;
       });
-    }
+    } 
   });
 }
 

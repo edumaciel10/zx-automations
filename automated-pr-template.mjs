@@ -14,4 +14,7 @@ await $`git push -u origin HEAD` // to not require interective on gh pr create
 let prBody = `${tag}: ${url}/issues/${idOfLastIssueAssigned}`;
 
 let prLink = (await $`gh pr create --fill --body ${prBody}`).toString();
-await $`xdg-open ${prLink}`; // open in browser to review
+// filter pr link to get link with regex
+let prLinkRegex = /https:\/\/github.com\/[^\/]+\/[^\/]+\/pull\/\d+/;
+let prLinkMatch = prLink.match(prLinkRegex);
+await $`xdg-open ${prLinkMatch}`; // open in browser to review

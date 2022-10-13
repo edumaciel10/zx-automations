@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/edumaciel10/zx-automations#readme",
   "dependencies": {
+    "open": "^8.4.0",
     "zx": "^7.0.0"
   }
 }

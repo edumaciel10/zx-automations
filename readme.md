@@ -32,6 +32,14 @@ You also can provide a specific repository to get the assigned issues on GitHub 
 
 - always be assinged to an issue before run the automation
 
+## concurrently repeat
+
+- example of running `zx ~/Projects/zx-automations/concurrently-repeat.mjs <command> <times>`
+
+### Example: show hi 5 times
+
+ `zx ~/Projects/zx-automations/concurrently-repeat.mjs "echo hi" 5`
+
 #### Examples
 
 ```bash

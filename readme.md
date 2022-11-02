@@ -47,3 +47,21 @@ You also can provide a specific repository to get the assigned issues on GitHub 
   npx zx automated-pr-template related https://github.com/edumaciel10/university-homeworks
 
 ```
+
+## codeowners
+
+- example of running `zx zx-automations/add-codeowners.mjs @edumaciel10`
+- recomended run into root file of repos
+- will search all repos that contain CODEOWNERS file and add the user to the file
+- the CODEOWNERS file should follow this pattern
+
+```bash
+# AUTOMATIC REVIEWERS
+* @edumaciel10 ...
+```
+
+## run into all repos
+
+- example of running `zx-automations/run-on-all-repos.mjs`
+- recomended run into root file of repos
+- you can change the code to run any command using zx into all repos

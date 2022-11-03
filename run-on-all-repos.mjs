@@ -1,5 +1,6 @@
 #!/usr/bin/env zx
 var pathPackage = require("path");
+import 'zx/globals'
 
 const paths = (await $`find . -maxdepth 3 -name ".git"`)
   .toString()
@@ -7,13 +8,16 @@ const paths = (await $`find . -maxdepth 3 -name ".git"`)
   .filter((value) => value !== "");
 
 const pathsWithAbsolutePath = paths.map((path) => {
-  const codeowners = fs.readFileSync(path, "utf8").split("\n")[1];
   const absolutePath = pathPackage.resolve(path)
-  return { absolutePath, codeowners };
+  return { absolutePath, path };
 });
 
-const repos = pathsWithAbsolutePath.map(async (codeowner) => {
-  const response = await $`cd ${codeowner.absolutePath.replace(".git",'')} && git stash && git checkout main && git pull origin main `;
+const repos = pathsWithAbsolutePath.map(async (path) => {
+  const commandToRun = `pwd`;
+
+  cd(path.absolutePath.replace(".git",''));
+
+  const response = await $([commandToRun]);
   return response;
 });
 

@@ -65,3 +65,8 @@ You also can provide a specific repository to get the assigned issues on GitHub 
 - example of running `zx-automations/run-on-all-repos.mjs`
 - recomended run into root file of repos
 - you can change the code to run any command using zx into all repos
+
+## replace template and create file for each replace
+
+- example of running `zx-automations/replace-and-create-file.mjs <target-folder-for-generated-templates> <template-file> <replace-values-separed-by-comma>`
+zx replace-and-create-file.mjs ./templates ./template.md "Banco do Brasil  , Banco da Amazônia  , Banco do Nordeste do Brasil ,"

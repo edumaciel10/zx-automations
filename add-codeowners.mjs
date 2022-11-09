@@ -23,12 +23,10 @@ const newCodeowners = codeowners.map((codeowner) => {
 });
 
 const prs = await newCodeowners.map(async (codeowner) => {
-  const codeownersFile = await fs.readFileSync(codeowner.absolutePath, "utf8").split("\n");
-  codeownersFile[1] = codeowner.newCodeowners;
-  fs.writeFileSync(codeowner.absolutePath, codeownersFile.join("\n"));
+  fs.writeFileSync(codeowner.absolutePath, "# AUTOMATIC REVIEWERS\n* @entria/woovi @entria/Developers");
 
-  const branchName = "chore/add-codeowners";
-  const commitName = `chore(add-codeowners): add ${newCodeOwner} to CODEOWNERS`;
+  const branchName = "chore/edit-codeowners";
+  const commitName = `chore(edit-codeowners): change all codeowners`;
 
   const response = await $`cd ${codeowner.absolutePath.replace("CODEOWNERS",'')} && git checkout -b ${branchName} && git add . && git commit -m ${commitName} -n && git push -u origin HEAD && gh pr create --fill --body ''`;
   let prLinkRegex = /https:\/\/github.com\/[^\/]+\/[^\/]+\/pull\/\d+/;

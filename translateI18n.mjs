@@ -4,15 +4,17 @@ const [, , , inputFile] = process.argv;
 import { fs } from 'zx';
 const filePath = path.resolve(inputFile);
 
-const language = filePath.split('/').pop().split('.')[0] === 'pt-BR' ? 'pt' : 'es';
+const originalLanguage = filePath.split('/').pop().split('.')[0] === 'pt-BR' ? 'pt' : 'es';
 
 const filePaths = [
   filePath,
-  language === 'pt' ? filePath.replace('pt-BR.json', 'es.json') : filePath.replace('es.json', 'pt-BR.json')
+  originalLanguage === 'pt' ? filePath.replace('pt-BR.json', 'es.json') : filePath.replace('es.json', 'pt-BR.json')
 ]
 // read the JSON file
 
 for (const inputFilePath of filePaths ) {
+  const actualLanguage = inputFilePath.split('/').pop().split('.')[0] === 'pt-BR' ? 'pt' : 'es';
+
   const json = await fs.readFile(inputFilePath, 'utf8');
 
   const parsedData = JSON.parse(json);
@@ -30,7 +32,7 @@ for (const inputFilePath of filePaths ) {
 
   const promiseParseString = stringsToParse.map(async (value, key) => {
     const string = Object.keys(value)[0];
-    const translatedString = (await $`trans -brief -s en -t ${language} ${string}`).toString().trim().replace(`\n`, '');
+    const translatedString = (await $`trans -brief -s en -t ${actualLanguage} ${string}`).toString().trim().replace(`\n`, '');
 
     console.log({string, translatedString})
     return { [string]: translatedString };
